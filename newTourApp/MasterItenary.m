@@ -10,6 +10,7 @@
 #import "WebService.h"
 #import "Constants.h"
 #import "Login.h"
+#import "DetailItenary.h"
 
 @interface MasterItenary (){
     NSArray *fixedProperties;
@@ -21,6 +22,8 @@
     NSData *data;
     UIImage *flat;
     UIActivityIndicatorView *image_loading;
+    UIImageView *flat_imageView;
+    int number;
 }
 
 @end
@@ -157,11 +160,14 @@ static NSArray *result;
         
         [image_loading startAnimating];
         
-        UIImageView *flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 180, 200)];
+        flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 180, 200)];
         profilePic = [[result valueForKey:@"building_images"] objectAtIndex:i];
         flat_imageView.image = flat;
+        flat_imageView.tag = i;
+        NSLog(@"The imageview tag is: %d",flat_imageView.tag);
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageClicked)];
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageClicked:)];
         singleTap.numberOfTapsRequired = 1;
         [flat_imageView setUserInteractionEnabled:YES];
         [flat_imageView addGestureRecognizer:singleTap];
@@ -196,8 +202,9 @@ static NSArray *result;
 
 }
 
--(void)ImageClicked{
+-(void)ImageClicked:(id)sender{
     
+    number = ((UIGestureRecognizer *)sender).view.tag;
     [self performSegueWithIdentifier:@"TimeForFlatDetail" sender:self];
     
 }
@@ -212,15 +219,12 @@ static NSArray *result;
     return result;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    DetailItenary *d = segue.destinationViewController;
+    d.flat_number = number;
 }
-*/
+
 
 @end

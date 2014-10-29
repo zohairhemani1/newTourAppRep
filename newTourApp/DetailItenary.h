@@ -10,4 +10,6 @@
 
 @interface DetailItenary : UIViewController
 
+
+@property int flat_number;
 @end
