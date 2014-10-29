@@ -71,22 +71,24 @@
 
             UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 170, 50)];
             
-            property_data.text = [[@"  " stringByAppendingString:[[[MasterItenary getFlatData] valueForKey:[leftDataFields objectAtIndex:i-1]]objectAtIndex:self.flat_number]]capitalizedString];
-            if([property_data.text isEqualToString:@"  "]){
-                property_data.text = @"  No Data Available";
+            property_data.text = [[[[MasterItenary getFlatData] valueForKey:[leftDataFields objectAtIndex:i-1]]objectAtIndex:self.flat_number]capitalizedString];
+            if([property_data.text isEqualToString:@""]){
+                property_data.text = @"No Data Available";
             }
             property_data.textColor= [UIColor blackColor];
             property_data.numberOfLines = 2;
+            property_data.textAlignment = NSTextAlignmentCenter;
             property_data.layer.borderWidth = 1.0f;
             property_data.layer.borderColor = [UIColor grayColor].CGColor;
             
             [self.view addSubview:property_data];
             
             y+=55;
-        if(i %5 ==0){
-            x+=185;
-            y=400;
-        }
+            if(i%5 ==0)
+            {
+                x+=185;
+                y=400;
+            }
             
         }
     
