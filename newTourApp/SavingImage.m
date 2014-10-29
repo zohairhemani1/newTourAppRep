@@ -26,7 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.captured_image.image = self.image_from_previous_screen;
 }
 
 - (void)didReceiveMemoryWarning

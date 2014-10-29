@@ -8,11 +8,21 @@
 
 #import "DetailItenary.h"
 #import "MasterItenary.h"
+#import "Constants.h"
+#import "SavingImage.h"
 
 @interface DetailItenary (){
     NSArray *leftDataFields;
     NSArray *rightDataFields;
     NSArray *fixedProperties;
+    UIView *rightDataView;
+    NSString *profilePic;
+    NSString *imagePathString;
+    NSURL *imagePathUrl;
+    NSData *data;
+    UIImage *flat;
+    UIActivityIndicatorView *image_loading;
+    UIImage *uploadedimage;
 }
 
 @end
@@ -39,8 +49,11 @@
     rightDataFields = [[NSArray alloc]initWithObjects:@"property_name",@"type",@"term",@"sq_ft",@"parking",@"monthly_parking_rate",@"floor_plan",@"asking_net_psf",@"additional_rent_psf",@"total_rent_psf",@"monthly_cost", nil];
     
     [self drawLeftData];
-    [self drawRightData];
     [self drawFixedPropertyValues];
+    [self drawRightData];
+    [self.view addSubview:rightDataView];
+    [self drawFlatImage];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,7 +71,7 @@
 
             UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 170, 50)];
             
-            property_data.text = [@"  " stringByAppendingString:[[[MasterItenary getFlatData] valueForKey:[leftDataFields objectAtIndex:i-1]]objectAtIndex:self.flat_number]];
+            property_data.text = [[@"  " stringByAppendingString:[[[MasterItenary getFlatData] valueForKey:[leftDataFields objectAtIndex:i-1]]objectAtIndex:self.flat_number]]capitalizedString];
             if([property_data.text isEqualToString:@"  "]){
                 property_data.text = @"  No Data Available";
             }
@@ -81,14 +94,14 @@
 
 -(void)drawRightData{
     
-    int x=800;
-    int y=200;
+    int x=200;
+    int y=0;
     
     for(int i=0;i<[rightDataFields count];i++){
         
-        UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 30)];
+        UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 35)];
         
-        property_data.text = [@"  " stringByAppendingString:[[[MasterItenary getFlatData] valueForKey:[rightDataFields objectAtIndex:i]]objectAtIndex:self.flat_number]];
+        property_data.text = [[@"  " stringByAppendingString:[[[MasterItenary getFlatData] valueForKey:[rightDataFields objectAtIndex:i]]objectAtIndex:self.flat_number]]capitalizedString];
         if([property_data.text isEqualToString:@"  "]){
             property_data.text = @"  No Data Available";
         }
@@ -97,45 +110,133 @@
         property_data.layer.borderWidth = 1.0f;
         property_data.layer.borderColor = [UIColor grayColor].CGColor;
         
-        [self.view addSubview:property_data];
+        [rightDataView addSubview:property_data];
         
-        y+=30;
+        y+=35;
         
     }
+    
+    rightDataView.layer.borderWidth = 2.0f;
+    rightDataView.layer.borderColor = [UIColor blackColor].CGColor;
     
 }
 
 -(void)drawFixedPropertyValues{
     
-    int x=600;
-    int y=200;
+    rightDataView = [[UIView alloc]initWithFrame:CGRectMake(600, 200, 400, [rightDataFields count]*35)];
+    
+    int x=0;
+    int y=0;
     
     for(int i=0;i<[fixedProperties count];i++){
         
-        UILabel *fixed_property_value = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 30)];
+        UILabel *fixed_property_value = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 35)];
         fixed_property_value.text = [@"  " stringByAppendingString:[[fixedProperties objectAtIndex:i]capitalizedString]];
         fixed_property_value.textColor= [UIColor blackColor];
         [fixed_property_value setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.f]];
         fixed_property_value.layer.borderWidth = 1.0f;
         fixed_property_value.layer.borderColor = [UIColor grayColor].CGColor;
         
-        [self.view addSubview:fixed_property_value];
+        [rightDataView addSubview:fixed_property_value];
         
-        y+=30;
+        y+=35;
     }
     
 }
 
+-(void)drawFlatImage{
+    image_loading = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(self.flat_image.bounds.origin.x+50,self.flat_image.bounds.origin.y+200,100,100)];
+    [image_loading setBackgroundColor:[UIColor grayColor]];
+    [image_loading setColor:[UIColor whiteColor]];
+    [self.view addSubview:image_loading];
+    
+    [image_loading startAnimating];
+    
+    
+    profilePic = [[[MasterItenary getFlatData] valueForKey:@"building_images"] objectAtIndex:self.flat_number];
 
-/*
-#pragma mark - Navigation
+    
+    imagePathString = GETIMAGE;
+    imagePathString = [imagePathString stringByAppendingString:profilePic];
+    imagePathUrl = [NSURL URLWithString:imagePathString];
+    
+    dispatch_queue_t myqueue = dispatch_queue_create("myqueue", NULL);
+    dispatch_async(myqueue, ^(void) {
+        
+        data = [[NSData alloc]initWithContentsOfURL:imagePathUrl];
+        flat = [[UIImage alloc]initWithData:data];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.flat_image.image = flat;
+            [self.view addSubview:self.flat_image];
+            [image_loading stopAnimating];
+        });
+    });
+
+}
+
+- (IBAction)cameraButtonPressed:(id)sender {
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"What do you want to do?"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"Camera", @"Photos", nil];
+    
+    [actionSheet showInView:self.view];
+    
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    
+    
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Photos"]) {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    else{
+        return;
+    }
+    [self presentViewController:picker animated:YES completion:nil];
+
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    uploadedimage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    [self performSegueWithIdentifier:@"ImageTaken" sender:self];
+}
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+     SavingImage *s = segue.destinationViewController;
+     s.image_from_previous_screen = uploadedimage;
+
 }
-*/
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
 
 @end

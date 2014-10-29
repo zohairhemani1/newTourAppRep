@@ -10,4 +10,7 @@
 
 @interface SavingImage : UIViewController
 
+@property (weak,nonatomic) UIImage *image_from_previous_screen;
+@property (weak, nonatomic) IBOutlet UIImageView *captured_image;
+
 @end

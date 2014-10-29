@@ -22,7 +22,6 @@
     NSData *data;
     UIImage *flat;
     UIActivityIndicatorView *image_loading;
-    UIImageView *flat_imageView;
     int number;
 }
 
@@ -103,7 +102,6 @@ static NSArray *result;
 -(void)drawFlatData{
 
     CGRect rect=CGRectMake(260,140,[result count] * 180,([dataFields count]*50)+150);
-    
     scroll = [[UIScrollView alloc] initWithFrame:rect];
     
     int x=0;
@@ -114,12 +112,11 @@ static NSArray *result;
         
         UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 180, 35)];
 
-        property_data.text = [@"  " stringByAppendingString:[[result valueForKey:[dataFields objectAtIndex:j]]objectAtIndex:i]];
-            if([property_data.text isEqualToString:@"  "]){
-                property_data.text = @"  No Data Available";
-            }
+        property_data.text = [[@"  " stringByAppendingString:[[result valueForKey:[dataFields objectAtIndex:j]]objectAtIndex:i]]capitalizedString];
+                if([property_data.text isEqualToString:@"  "]){
+                    property_data.text = @"  No Data Available";
+                }
         property_data.textColor= [UIColor blackColor];
-        
         property_data.layer.borderWidth = 1.0f;
         property_data.layer.borderColor = [UIColor grayColor].CGColor;
         
@@ -155,27 +152,22 @@ static NSArray *result;
         [scroll addSubview:time];
         
         image_loading = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(x+40,y+70,100,100)];
-        [image_loading setColor:[UIColor blackColor]];
+        [image_loading setBackgroundColor:[UIColor grayColor]];
+        [image_loading setColor:[UIColor whiteColor]];
         [scroll addSubview:image_loading];
         
         [image_loading startAnimating];
         
-        flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 180, 200)];
+        UIImageView *flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 180, 200)];
         profilePic = [[result valueForKey:@"building_images"] objectAtIndex:i];
-        flat_imageView.image = flat;
-        flat_imageView.tag = i;
-        NSLog(@"The imageview tag is: %d",flat_imageView.tag);
-        
         
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageClicked:)];
         singleTap.numberOfTapsRequired = 1;
         [flat_imageView setUserInteractionEnabled:YES];
         [flat_imageView addGestureRecognizer:singleTap];
         
-        
         imagePathString = GETIMAGE;
         imagePathString = [imagePathString stringByAppendingString:profilePic];
-        
         imagePathUrl = [NSURL URLWithString:imagePathString];
         
         dispatch_queue_t myqueue = dispatch_queue_create("myqueue", NULL);
@@ -190,16 +182,14 @@ static NSArray *result;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 flat_imageView.image = flat;
+                flat_imageView.tag = i;
+                [scroll addSubview:flat_imageView];
                 [image_loading stopAnimating];
             });
-            
         });
 
-        [scroll addSubview:flat_imageView];
-        
         x+=180;
     }
-
 }
 
 -(void)ImageClicked:(id)sender{

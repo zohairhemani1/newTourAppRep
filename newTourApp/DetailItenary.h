@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailItenary : UIViewController
+@interface DetailItenary : UIViewController<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
-
+@property (weak, nonatomic) IBOutlet UIImageView *flat_image;
 @property int flat_number;
+
+- (IBAction)cameraButtonPressed:(id)sender;
+
 @end
