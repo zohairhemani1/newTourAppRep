@@ -8,7 +8,10 @@
 
 #import "CategoryImage.h"
 
-@interface CategoryImage ()
+@interface CategoryImage (){
+    NSArray *fixedButtons;
+    UIButton *category_button;
+}
 
 @end
 
@@ -26,7 +29,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    fixedButtons = [[NSArray alloc]initWithObjects:@"building images",@"building lobby",@"amenities",@"day care",@"path connection",@"public transit",@"parking",@"elevators",@"elevator lobby",@"suit entrance",@"condition of premises",@"views",@"IT room",@"frieght elevator",@"green aspects", nil];
+    
+    [self drawCategoryButtons];
+}
+
+-(void)drawCategoryButtons{
+    int x=50;
+    int y=90;
+    
+    for(int i=1;i<=[fixedButtons count];i++){
+        
+        category_button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 180, 50)];
+        [category_button setTitle:[[fixedButtons objectAtIndex:i-1]capitalizedString]forState:normal];
+        [category_button setTitleColor:[UIColor blackColor] forState:normal];
+        [category_button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        category_button.layer.borderWidth = 1.0f;
+        category_button.layer.borderColor = [UIColor grayColor].CGColor;
+        
+        category_button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        category_button.titleLabel.textAlignment = NSTextAlignmentCenter;
+        category_button.tag = i-1;
+        
+        [self.view addSubview:category_button];
+        
+        x+=185;
+        
+        if(i%5 == 0){
+            y+=60;
+            x=50;
+        }
+    }
+}
+
+-(void)buttonClicked:(id)sender{
+    
+    category_button = (UIButton *)sender;
+    NSLog(@"Button clicked with tag %d", category_button.tag);
 }
 
 - (void)didReceiveMemoryWarning

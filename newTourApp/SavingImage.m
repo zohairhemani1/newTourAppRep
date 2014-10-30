@@ -32,9 +32,15 @@
     
     self.captured_image.image = self.image_from_previous_screen;
     
+    self.saveButton.layer.cornerRadius = 7;
+    self.saveButton.clipsToBounds = YES;
+    
+    self.commentsView.delegate = self;
+    
     fixedButtons = [[NSArray alloc]initWithObjects:@"building images",@"building lobby",@"amenities",@"day care",@"path connection",@"public transit",@"parking",@"elevators",@"elevator lobby",@"suit entrance",@"condition of premises",@"views",@"IT room",@"frieght elevator",@"green aspects", nil];
     
     [self drawCategoryButtons];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,15 +81,42 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	self.view.frame = CGRectMake(self.view.frame.origin.x , self.view.frame.origin.y - 250.0, self.view.frame.size.width, self.view.frame.size.height);
+	[UIView commitAnimations];
 }
-*/
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	self.view.frame = CGRectMake(self.view.frame.origin.x , self.view.frame.origin.y + 250.0 , self.view.frame.size.width, self.view.frame.size.height);
+	[UIView commitAnimations];
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (IBAction)saveButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"showSavedImages" sender:self];
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

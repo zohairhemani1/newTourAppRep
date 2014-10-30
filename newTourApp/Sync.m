@@ -28,7 +28,9 @@ static NSArray *result;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.syncButton.layer.cornerRadius = 7;
+    self.syncButton.clipsToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning

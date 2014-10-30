@@ -28,6 +28,13 @@ static NSArray *result;
     self.username.delegate = self;
     self.password.delegate = self;
     
+    self.loginButton.layer.cornerRadius = 7;
+    self.loginButton.clipsToBounds = YES;
+    
+    self.cancelButton.layer.cornerRadius = 7;
+    self.cancelButton.clipsToBounds = YES;
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +56,10 @@ static NSArray *result;
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
+    
+    [self.username resignFirstResponder];
+    [self.password resignFirstResponder];
+    
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

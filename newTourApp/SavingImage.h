@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SavingImage : UIViewController
+@interface SavingImage : UIViewController<UITextViewDelegate>
 
 @property (weak,nonatomic) UIImage *image_from_previous_screen;
 @property (weak, nonatomic) IBOutlet UIImageView *captured_image;
+@property (weak, nonatomic) IBOutlet UITextView *commentsView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+- (IBAction)saveButtonPressed:(id)sender;
 
 @end

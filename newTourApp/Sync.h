@@ -12,5 +12,6 @@
 - (IBAction)syncButtonPressed:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIButton *syncButton;
 
 @end

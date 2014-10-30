@@ -53,7 +53,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -108,6 +108,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="progressView" destination="45y-vf-qNJ" id="MoS-8h-VL8"/>
+                        <outlet property="syncButton" destination="Dzk-ac-Byq" id="Vhh-3H-wvq"/>
                         <segue destination="q4N-kM-moR" kind="modal" identifier="showMaster" id="GOc-L2-K0x"/>
                     </connections>
                 </viewController>
@@ -237,6 +238,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="g7N-Pf-KdS" eventType="touchUpInside" id="9eR-zT-4gC"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="COMMENTS / NOTES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhh-JP-8Zk">
                                 <rect key="frame" x="26" y="523" width="171" height="21"/>
@@ -259,6 +263,9 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="captured_image" destination="mNL-Oj-qzT" id="WFZ-tg-0Or"/>
+                        <outlet property="commentsView" destination="gRC-xE-peV" id="2ME-M9-DLt"/>
+                        <outlet property="saveButton" destination="fmq-Fd-l56" id="vWY-x2-ZR1"/>
+                        <segue destination="XuT-KZ-gLK" kind="push" identifier="showSavedImages" id="EHZ-6K-aJz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pg-Ey-EBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -279,6 +286,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XDQ-7b-ptV"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="asu-TU-ge6" userLabel="First Responder" sceneMemberID="firstResponder"/>
