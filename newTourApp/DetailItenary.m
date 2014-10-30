@@ -125,7 +125,7 @@
 
 -(void)drawFixedPropertyValues{
     
-    rightDataView = [[UIView alloc]initWithFrame:CGRectMake(600, 200, 400, [rightDataFields count]*35)];
+    rightDataView = [[UIView alloc]initWithFrame:CGRectMake(600, 285, 400, [rightDataFields count]*35)];
     
     int x=0;
     int y=0;
