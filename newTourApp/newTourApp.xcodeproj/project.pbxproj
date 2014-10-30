@@ -27,6 +27,7 @@
 		1998B5BE19FFB52500405E35 /* SavingImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1998B5BD19FFB52500405E35 /* SavingImage.m */; };
 		1998B5C119FFB53600405E35 /* CategoryImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1998B5C019FFB53600405E35 /* CategoryImage.m */; };
 		1998B5C519FFC2F700405E35 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1998B5C319FFC2F700405E35 /* WebService.m */; };
+		B72B125C1A0275B200CCEF60 /* FileManagerLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = B72B125B1A0275B200CCEF60 /* FileManagerLibrary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		1998B5C219FFC2F700405E35 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
 		1998B5C319FFC2F700405E35 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
 		1998B5C419FFC2F700405E35 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		B72B125A1A0275B200CCEF60 /* FileManagerLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManagerLibrary.h; sourceTree = "<group>"; };
+		B72B125B1A0275B200CCEF60 /* FileManagerLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManagerLibrary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 		1998B58419FFB1A800405E35 /* newTourApp */ = {
 			isa = PBXGroup;
 			children = (
+				B72B125A1A0275B200CCEF60 /* FileManagerLibrary.h */,
+				B72B125B1A0275B200CCEF60 /* FileManagerLibrary.m */,
 				1998B5C219FFC2F700405E35 /* WebService.h */,
 				1998B5C319FFC2F700405E35 /* WebService.m */,
 				1998B5C419FFC2F700405E35 /* Constants.h */,
@@ -285,6 +290,7 @@
 				1998B59519FFB1A800405E35 /* Login.m in Sources */,
 				1998B58F19FFB1A800405E35 /* AppDelegate.m in Sources */,
 				1998B5B519FFB4E700405E35 /* Sync.m in Sources */,
+				B72B125C1A0275B200CCEF60 /* FileManagerLibrary.m in Sources */,
 				1998B5C119FFB53600405E35 /* CategoryImage.m in Sources */,
 				1998B5B819FFB4FA00405E35 /* MasterItenary.m in Sources */,
 				1998B58B19FFB1A800405E35 /* main.m in Sources */,
@@ -500,6 +506,7 @@
 				1998B5AF19FFB1A800405E35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1998B5B019FFB1A800405E35 /* Build configuration list for PBXNativeTarget "newTourAppTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +515,7 @@
 				1998B5B219FFB1A800405E35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
