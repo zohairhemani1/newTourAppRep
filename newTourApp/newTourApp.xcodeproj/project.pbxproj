@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		192597C91A027CB800027772 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 192597C81A027CB800027772 /* DBManager.m */; };
+		192597CB1A02808F00027772 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 192597CA1A02808F00027772 /* libsqlite3.dylib */; };
 		1998B57F19FFB1A800405E35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1998B57E19FFB1A800405E35 /* Foundation.framework */; };
 		1998B58119FFB1A800405E35 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1998B58019FFB1A800405E35 /* CoreGraphics.framework */; };
 		1998B58319FFB1A800405E35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1998B58219FFB1A800405E35 /* UIKit.framework */; };
@@ -41,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		192597C71A027CB800027772 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = SOURCE_ROOT; };
+		192597C81A027CB800027772 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = SOURCE_ROOT; };
+		192597CA1A02808F00027772 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		1998B57B19FFB1A800405E35 /* newTourApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newTourApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1998B57E19FFB1A800405E35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1998B58019FFB1A800405E35 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -82,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				192597CB1A02808F00027772 /* libsqlite3.dylib in Frameworks */,
 				1998B58119FFB1A800405E35 /* CoreGraphics.framework in Frameworks */,
 				1998B58319FFB1A800405E35 /* UIKit.framework in Frameworks */,
 				1998B57F19FFB1A800405E35 /* Foundation.framework in Frameworks */,
@@ -123,6 +129,7 @@
 		1998B57D19FFB1A800405E35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				192597CA1A02808F00027772 /* libsqlite3.dylib */,
 				1998B57E19FFB1A800405E35 /* Foundation.framework */,
 				1998B58019FFB1A800405E35 /* CoreGraphics.framework */,
 				1998B58219FFB1A800405E35 /* UIKit.framework */,
@@ -156,6 +163,8 @@
 				1998B5C019FFB53600405E35 /* CategoryImage.m */,
 				1998B59619FFB1A800405E35 /* Images.xcassets */,
 				1998B58519FFB1A800405E35 /* Supporting Files */,
+				192597C71A027CB800027772 /* DBManager.h */,
+				192597C81A027CB800027772 /* DBManager.m */,
 			);
 			path = newTourApp;
 			sourceTree = "<group>";
@@ -293,6 +302,7 @@
 				B72B125C1A0275B200CCEF60 /* FileManagerLibrary.m in Sources */,
 				1998B5C119FFB53600405E35 /* CategoryImage.m in Sources */,
 				1998B5B819FFB4FA00405E35 /* MasterItenary.m in Sources */,
+				192597C91A027CB800027772 /* DBManager.m in Sources */,
 				1998B58B19FFB1A800405E35 /* main.m in Sources */,
 				1998B5BE19FFB52500405E35 /* SavingImage.m in Sources */,
 				1998B5BB19FFB50A00405E35 /* DetailItenary.m in Sources */,

@@ -9,6 +9,7 @@
 #import "Login.h"
 #import "WebService.h"
 #import "Constants.h"
+#import "DBManager.h"
 
 @interface Login (){
     
@@ -50,12 +51,22 @@ static NSArray *result;
     
     if([result valueForKey:@"user_email"] !=nil ){
     
-        [self performSegueWithIdentifier:@"StartLoginProcess" sender:self];
+       // [self performSegueWithIdentifier:@"StartLoginProcess" sender:self];
+        
+//        [[DBManager getSharedInstance]saveData:@"img.name"comments:@"I love this image" category:@"Bathroom1" userID:@"2" isSync:1];
+//        
+//        [[DBManager getSharedInstance]saveData:@"img1.name"comments:@"I love this image" category:@"Bathroom1" userID:@"2" isSync:1];
+//        
+//        [[DBManager getSharedInstance]saveData:@"img2.name"comments:@"I love this image" category:@"Bathroom2" userID:@"3" isSync:1];
+//        
+//        [[DBManager getSharedInstance]saveData:@"img3.name"comments:@"I love this image" category:@"Bathroom2" userID:@"3" isSync:1];
     }
     
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
+    
+    //[[DBManager getSharedInstance]findByUserID:@"3"Sync:-1 Category:nil];
     
     [self.username resignFirstResponder];
     [self.password resignFirstResponder];

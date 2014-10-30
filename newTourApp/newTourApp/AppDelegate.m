@@ -7,12 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "DBManager.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [DBManager getSharedInstance];
+    
     return YES;
 }
 							
