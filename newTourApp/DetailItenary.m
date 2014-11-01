@@ -42,7 +42,7 @@
 {
     [super viewDidLoad];
     
-    leftDataFields = [[NSArray alloc]initWithObjects:@"building_images",@"building_lobby",@"amenities",@"sec_inf_day_care",@"path_connection",@"public_transit",@"sec_inf_parking",@"sec_inf_elevators",@"sec_inf_elevator_lobby",@"sec_inf_suit_entrance",@"sec_inf_condition_of_premises",@"sec_inf_views",@"sec_inf_IT_rooms",@"sec_inf_frieght_elevator",@"sec_inf_green_aspects", nil];
+    leftDataFields = [[NSArray alloc]initWithObjects:@"building images",@"building lobby",@"amenities",@"day care",@"path connection",@"public transit",@"parking",@"elevators",@"elevator lobby",@"suit entrance",@"condition of premises",@"views",@"IT room",@"frieght elevator",@"green aspects", nil];
     
     fixedProperties = [[NSArray alloc]initWithObjects:@"address",@"type",@"term",@"square footage",@"parking available",@"monthly parking rate",@"floorplan",@"asking net rate psf",@"additional rent psf",@"total rent psf",@"monthly cost", nil];
     
@@ -69,19 +69,19 @@
     
     for(int i=1;i<=[leftDataFields count];i++){
 
-            UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 170, 50)];
+        UIButton *category_button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 170, 50)];
             
-            property_data.text = [[[[MasterItenary getFlatData] valueForKey:[leftDataFields objectAtIndex:i-1]]objectAtIndex:self.flat_number]capitalizedString];
-            if([property_data.text isEqualToString:@""]){
-                property_data.text = @"No Data Available";
-            }
-            property_data.textColor= [UIColor blackColor];
-            property_data.numberOfLines = 2;
-            property_data.textAlignment = NSTextAlignmentCenter;
-            property_data.layer.borderWidth = 1.0f;
-            property_data.layer.borderColor = [UIColor grayColor].CGColor;
+        category_button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 180, 55)];
+        [category_button setTitle:[[leftDataFields objectAtIndex:i-1]capitalizedString]forState:normal];
+        [category_button setTitleColor:[UIColor blackColor] forState:normal];
+        [category_button addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        category_button.layer.borderWidth = 1.0f;
+        category_button.layer.borderColor = [UIColor blackColor].CGColor;
+        
+        category_button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        category_button.titleLabel.textAlignment = NSTextAlignmentCenter;
             
-            [self.view addSubview:property_data];
+            [self.view addSubview:category_button];
             
             y+=55;
             if(i%5 ==0)
@@ -155,7 +155,7 @@
     [image_loading startAnimating];
     
     
-    profilePic = [[[MasterItenary getFlatData] valueForKey:@"building_images"] objectAtIndex:self.flat_number];
+    profilePic = [[[MasterItenary getFlatData] valueForKey:@"property_path"] objectAtIndex:self.flat_number];
 
     
     imagePathString = GETIMAGE;
@@ -176,7 +176,6 @@
             [image_loading stopAnimating];
         });
     });
-
 }
 
 - (IBAction)cameraButtonPressed:(id)sender {
@@ -199,6 +198,7 @@
     
     
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
+        
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Photos"]) {
@@ -223,9 +223,16 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
+    if([segue.identifier isEqualToString:@"ImageTaken"])
+    {
      SavingImage *s = segue.destinationViewController;
      s.image_from_previous_screen = uploadedimage;
+    }
+    
+    else if ([segue.identifier isEqualToString:@"categoryDetail"])
+    {
+        
+    }
 
 }
 
@@ -239,6 +246,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscape;
+}
+
+-(void)categoryButtonClicked:(id)sender{
+    
+    NSLog(@"Button Clicked");
+    [self performSegueWithIdentifier:@"categoryDetail" sender:self];
 }
 
 @end

@@ -65,8 +65,16 @@
 
 -(void)buttonClicked:(id)sender{
     
+    for(int i=1;i<=[fixedButtons count];i++){
+        
+        [category_button setBackgroundColor:[UIColor whiteColor]];
+        
+    }
+    
     category_button = (UIButton *)sender;
     NSLog(@"Button clicked with tag %d", category_button.tag);
+    
+    [category_button setBackgroundColor:[UIColor grayColor]];
 }
 
 - (void)didReceiveMemoryWarning

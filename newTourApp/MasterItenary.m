@@ -20,7 +20,7 @@
     NSString *imagePathString;
     NSURL *imagePathUrl;
     NSData *data;
-    UIImage *flat;
+   // UIImage *flat;
     UIActivityIndicatorView *image_loading;
     int number;
 }
@@ -55,7 +55,7 @@ static NSArray *result;
     
     self.client_name.text = [[Login getUserArray]valueForKey:@"user_name"];
     
-    scroll.contentSize = CGSizeMake([result count]*180, 200);
+    scroll.contentSize = CGSizeMake([result count]*180+500, 200);
     scroll.showsHorizontalScrollIndicator = YES;
     
 }
@@ -112,10 +112,12 @@ static NSArray *result;
         
         UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 180, 35)];
 
-        property_data.text = [[@"  " stringByAppendingString:[[result valueForKey:[dataFields objectAtIndex:j]]objectAtIndex:i]]capitalizedString];
-                if([property_data.text isEqualToString:@"  "]){
-                    property_data.text = @"  No Data Available";
+        property_data.text = [[[result valueForKey:[dataFields objectAtIndex:j]]objectAtIndex:i]capitalizedString];
+                if([property_data.text isEqualToString:@""]){
+                    property_data.text = @"No Data Available";
                 }
+            
+        property_data.textAlignment = NSTextAlignmentCenter;
         property_data.textColor= [UIColor blackColor];
         property_data.layer.borderWidth = 1.0f;
         property_data.layer.borderColor = [UIColor grayColor].CGColor;
@@ -159,22 +161,23 @@ static NSArray *result;
         [image_loading startAnimating];
         
         UIImageView *flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 180, 200)];
-        profilePic = [[result valueForKey:@"building_images"] objectAtIndex:i];
+        profilePic = [[result valueForKey:@"property_path"] objectAtIndex:i];
         
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageClicked:)];
         singleTap.numberOfTapsRequired = 1;
         [flat_imageView setUserInteractionEnabled:YES];
         [flat_imageView addGestureRecognizer:singleTap];
         
-        imagePathString = GETIMAGE;
-        imagePathString = [imagePathString stringByAppendingString:profilePic];
+        imagePathString = [GETIMAGE stringByAppendingString:profilePic];
+        NSLog(@"the image path is %@",imagePathString);
         imagePathUrl = [NSURL URLWithString:imagePathString];
+        data = [[NSData alloc]initWithContentsOfURL:imagePathUrl];
         
         dispatch_queue_t myqueue = dispatch_queue_create("myqueue", NULL);
         dispatch_async(myqueue, ^(void) {
             
-            data = [[NSData alloc]initWithContentsOfURL:imagePathUrl];
-            flat = [[UIImage alloc]initWithData:data];
+            
+            UIImage *flat = [[UIImage alloc]initWithData:data];
             
             flat_imageView.layer.borderColor = [UIColor grayColor].CGColor;
             flat_imageView.layer.borderWidth = 1.0f;
@@ -209,12 +212,10 @@ static NSArray *result;
     return result;
 }
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     DetailItenary *d = segue.destinationViewController;
     d.flat_number = number;
 }
-
 
 @end

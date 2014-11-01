@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="q4N-kM-moR">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -56,7 +56,6 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -200,6 +199,7 @@
                     <connections>
                         <outlet property="flat_image" destination="KDy-qo-hlw" id="dpd-La-97P"/>
                         <segue destination="g7N-Pf-KdS" kind="push" identifier="ImageTaken" id="ctX-kc-4iv"/>
+                        <segue destination="Ygp-sB-iXk" kind="push" identifier="categoryDetail" id="zlt-ZB-gJX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hal-qj-N1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,6 +270,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pg-Ey-EBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5016" y="-334"/>
+        </scene>
+        <!--Show Category-->
+        <scene sceneID="PJc-GJ-abS">
+            <objects>
+                <viewController id="Ygp-sB-iXk" customClass="showCategory" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f9s-kG-E12"/>
+                        <viewControllerLayoutGuide type="bottom" id="IC6-U1-sh9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uK8-PC-ab7">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0id-6m-PhK"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6up-1T-EMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3878" y="623"/>
         </scene>
         <!--Category Image-->
         <scene sceneID="Mhv-HO-Pi3">

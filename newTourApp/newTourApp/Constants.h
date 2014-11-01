@@ -8,14 +8,12 @@
 
 #define TourApp_Constants_h
 #define LOGIN @"http://beta.bluekart.com/webapp/services/api-check-login.php"
-<<<<<<< HEAD
-#define FLATDATA @"http://beta.bluekart.com/webapp/services/api-sending-data.php"
+
 #define ADDIMAGE @"http://beta.bluekart.com/webapp/services/add-images.php"
-=======
+
 //#define FLATDATA @"http://beta.bluekart.com/webapp/services/api-sending-data.php"
 #define FLATDATA @"http://beta.bluekart.com/webapp_new/webapp/services/api-sending-data.php"
-#define ADDIMAGE @"http://beta.bluekart.com/webapp/webapp/services/add-images.php"
->>>>>>> FETCH_HEAD
+
 
 #define GETIMAGE @"http://beta.bluekart.com/webapp_new/webapp/"
 
