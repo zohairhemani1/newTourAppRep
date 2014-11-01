@@ -7,6 +7,8 @@
 //
 
 #import "Sync.h"
+#import "WebService.h"
+#import "Constants.h"
 
 @interface Sync ()
 
@@ -42,6 +44,9 @@ static NSArray *result;
 - (IBAction)syncButtonPressed:(id)sender {
     
     [self.progressView setProgress:1.0 animated:YES];
+    
+    WebService *w = [[WebService alloc]init];
+    //[w FilePathOfSendingImage:ADDIMAGE parameterOne:nil parameterTwo:@"1" parameterThree:@"2" parameterFour:@"buildinglobby"];
     
     [self performSegueWithIdentifier:@"showMaster" sender:self];
     

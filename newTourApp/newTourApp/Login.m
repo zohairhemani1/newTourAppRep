@@ -51,7 +51,7 @@ static NSArray *result;
     
     if([result valueForKey:@"user_email"] !=nil ){
     
-       // [self performSegueWithIdentifier:@"StartLoginProcess" sender:self];
+        [self performSegueWithIdentifier:@"StartLoginProcess" sender:self];
         
 //        [[DBManager getSharedInstance]saveData:@"img.name"comments:@"I love this image" category:@"Bathroom1" userID:@"2" isSync:1];
 //        

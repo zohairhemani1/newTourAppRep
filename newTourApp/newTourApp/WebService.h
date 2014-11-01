@@ -14,4 +14,6 @@
 -(NSArray*)FilePath:(NSString*)filepath parameterOne:(NSString*)parameterOne parameterTwo:(NSString*)parameterTwo;
 -(NSArray*)FilePath:(NSString*)filepath parameterOne:(NSString*)parameterOne;
 -(NSArray*)FilePath:(NSString*)filepath;
+
+-(NSArray*)FilePathOfSendingImage:(NSString*)filepath parameterOne:(NSString*)parameterOne parameterTwo:(NSString*)parameterTwo parameterThree:(NSString*)parameterThree parameterFour:(NSString*)parameterFour;
 @end
