@@ -15,5 +15,7 @@
 @property int flat_number;
 
 - (IBAction)cameraButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *Address;
+@property (weak, nonatomic) IBOutlet UILabel *sq_ft_space;
 
 @end

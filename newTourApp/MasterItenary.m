@@ -53,9 +53,9 @@ static NSArray *result;
     [self drawImages];
     [self.view addSubview:scroll];
     
-    self.client_name.text = [[Login getUserArray]valueForKey:@"user_name"];
+    self.client_name.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"user_name"];
     
-    scroll.contentSize = CGSizeMake([result count]*180+500, 200);
+    scroll.contentSize = CGSizeMake([result count]*190+568, 200);
     scroll.showsHorizontalScrollIndicator = YES;
     
 }
@@ -101,7 +101,7 @@ static NSArray *result;
 
 -(void)drawFlatData{
 
-    CGRect rect=CGRectMake(260,140,[result count] * 180,([dataFields count]*50)+150);
+    CGRect rect=CGRectMake(260,140,[result count] * 190,([dataFields count]*50)+150);
     scroll = [[UIScrollView alloc] initWithFrame:rect];
     
     int x=0;
@@ -110,7 +110,7 @@ static NSArray *result;
     for(int i=0;i<[result count];i++){
         for(int j=0;j<[dataFields count];j++){
         
-        UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 180, 35)];
+        UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 190, 35)];
 
         property_data.text = [[[result valueForKey:[dataFields objectAtIndex:j]]objectAtIndex:i]capitalizedString];
                 if([property_data.text isEqualToString:@""]){
@@ -127,7 +127,7 @@ static NSArray *result;
         y+=35;
             
         }
-        x+=180;
+        x+=190;
         y = 230;
     }
 }
@@ -140,7 +140,7 @@ static NSArray *result;
     
     for(int i=0;i<[result count];i++){
         
-        UILabel *time = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 180, 30)];
+        UILabel *time = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 190, 30)];
         
         time.text = [[result valueForKey:@"visit_time"]objectAtIndex:i];
         if([time.text isEqualToString:@""]){
@@ -160,23 +160,28 @@ static NSArray *result;
         
         [image_loading startAnimating];
         
-        UIImageView *flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 180, 200)];
-        profilePic = [[result valueForKey:@"property_path"] objectAtIndex:i];
-        
+        UIImageView *flat_imageView = [[UIImageView alloc]initWithFrame:CGRectMake(x, y+30, 190, 200)];
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ImageClicked:)];
         singleTap.numberOfTapsRequired = 1;
         [flat_imageView setUserInteractionEnabled:YES];
         [flat_imageView addGestureRecognizer:singleTap];
         
+        profilePic = [[result valueForKey:@"property_path"] objectAtIndex:i];
+        if ([profilePic isEqualToString:@""]){
+            UIImage *flat = [UIImage imageNamed:@"no_image"];
+            flat_imageView.image = flat;
+            flat_imageView.tag = i;
+            [scroll addSubview:flat_imageView];
+            [image_loading stopAnimating];
+        }
+        else{
         imagePathString = [GETIMAGE stringByAppendingString:profilePic];
-        NSLog(@"the image path is %@",imagePathString);
         imagePathUrl = [NSURL URLWithString:imagePathString];
-        data = [[NSData alloc]initWithContentsOfURL:imagePathUrl];
         
         dispatch_queue_t myqueue = dispatch_queue_create("myqueue", NULL);
         dispatch_async(myqueue, ^(void) {
             
-            
+            data = [[NSData alloc]initWithContentsOfURL:imagePathUrl];
             UIImage *flat = [[UIImage alloc]initWithData:data];
             
             flat_imageView.layer.borderColor = [UIColor grayColor].CGColor;
@@ -190,8 +195,8 @@ static NSArray *result;
                 [image_loading stopAnimating];
             });
         });
-
-        x+=180;
+        }
+        x+=190;
     }
 }
 

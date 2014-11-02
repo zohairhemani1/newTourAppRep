@@ -10,4 +10,6 @@
 
 @interface CategoryImage : UIViewController
 
+@property int selected_category;
+
 @end

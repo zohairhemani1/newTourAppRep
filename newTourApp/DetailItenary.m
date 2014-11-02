@@ -10,6 +10,7 @@
 #import "MasterItenary.h"
 #import "Constants.h"
 #import "SavingImage.h"
+#import "CategoryImage.h"
 
 @interface DetailItenary (){
     NSArray *leftDataFields;
@@ -23,6 +24,7 @@
     UIImage *flat;
     UIActivityIndicatorView *image_loading;
     UIImage *uploadedimage;
+    UIButton *category_button;
 }
 
 @end
@@ -54,6 +56,22 @@
     [self.view addSubview:rightDataView];
     [self drawFlatImage];
     
+    self.sq_ft_space.text = [[[MasterItenary getFlatData] valueForKey:@"sq_ft"]objectAtIndex:self.flat_number];
+//    NSLog(@"1");
+//    NSString *Address = [[[MasterItenary getFlatData] valueForKey:@"addressname"]objectAtIndex:self.flat_number];
+//    NSLog(@"2");
+//    if([Address isEqualToString:@"<null>"])
+//    {
+//        NSLog(@"3");
+//        self.Address.text = @"No Address Provided";
+//    }
+//    else
+//    {
+//        NSLog(@"4");
+//        self.Address.text = Address;
+//    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,33 +83,31 @@
 -(void)drawLeftData{
 
     int x=30;
-    int y=400;
+    int y=415;
     
     for(int i=1;i<=[leftDataFields count];i++){
 
-        UIButton *category_button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 170, 50)];
-            
-        category_button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 180, 55)];
+        category_button = [[UIButton alloc]initWithFrame:CGRectMake(x, y, 170, 50)];
+
         [category_button setTitle:[[leftDataFields objectAtIndex:i-1]capitalizedString]forState:normal];
         [category_button setTitleColor:[UIColor blackColor] forState:normal];
         [category_button addTarget:self action:@selector(categoryButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         category_button.layer.borderWidth = 1.0f;
         category_button.layer.borderColor = [UIColor blackColor].CGColor;
-        
+        category_button.tag = i-1;
         category_button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         category_button.titleLabel.textAlignment = NSTextAlignmentCenter;
             
-            [self.view addSubview:category_button];
+        [self.view addSubview:category_button];
             
-            y+=55;
-            if(i%5 ==0)
+        y+=55;
+        if(i%5 ==0)
             {
                 x+=185;
-                y=400;
+                y=415;
             }
             
         }
-    
 }
 
 -(void)drawRightData{
@@ -101,20 +117,21 @@
     
     for(int i=0;i<[rightDataFields count];i++){
         
-        UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 35)];
+        UILabel *property_data = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 45)];
         
-        property_data.text = [[@"  " stringByAppendingString:[[[MasterItenary getFlatData] valueForKey:[rightDataFields objectAtIndex:i]]objectAtIndex:self.flat_number]]capitalizedString];
-        if([property_data.text isEqualToString:@"  "]){
-            property_data.text = @"  No Data Available";
+        property_data.text = [[[[MasterItenary getFlatData] valueForKey:[rightDataFields objectAtIndex:i]]objectAtIndex:self.flat_number]capitalizedString];
+        if([property_data.text isEqualToString:@""]){
+            property_data.text = @"No Data Available";
         }
         property_data.textColor= [UIColor blackColor];
-        
+        property_data.textAlignment = NSTextAlignmentCenter;
+        property_data.numberOfLines = 2;
         property_data.layer.borderWidth = 1.0f;
         property_data.layer.borderColor = [UIColor grayColor].CGColor;
         
         [rightDataView addSubview:property_data];
         
-        y+=35;
+        y+=45;
         
     }
     
@@ -125,14 +142,14 @@
 
 -(void)drawFixedPropertyValues{
     
-    rightDataView = [[UIView alloc]initWithFrame:CGRectMake(600, 285, 400, [rightDataFields count]*35)];
+    rightDataView = [[UIView alloc]initWithFrame:CGRectMake(600, 190, 400, [rightDataFields count]*45)];
     
     int x=0;
     int y=0;
     
     for(int i=0;i<[fixedProperties count];i++){
         
-        UILabel *fixed_property_value = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 35)];
+        UILabel *fixed_property_value = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 200, 45)];
         fixed_property_value.text = [@"  " stringByAppendingString:[[fixedProperties objectAtIndex:i]capitalizedString]];
         fixed_property_value.textColor= [UIColor blackColor];
         [fixed_property_value setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.f]];
@@ -141,7 +158,7 @@
         
         [rightDataView addSubview:fixed_property_value];
         
-        y+=35;
+        y+=45;
     }
     
 }
@@ -154,19 +171,20 @@
     
     [image_loading startAnimating];
     
-    
     profilePic = [[[MasterItenary getFlatData] valueForKey:@"property_path"] objectAtIndex:self.flat_number];
-
-    
-    imagePathString = GETIMAGE;
-    imagePathString = [imagePathString stringByAppendingString:profilePic];
+    imagePathString = [GETIMAGE stringByAppendingString:profilePic];
     imagePathUrl = [NSURL URLWithString:imagePathString];
-    
+
     dispatch_queue_t myqueue = dispatch_queue_create("myqueue", NULL);
     dispatch_async(myqueue, ^(void) {
         
         data = [[NSData alloc]initWithContentsOfURL:imagePathUrl];
         flat = [[UIImage alloc]initWithData:data];
+        
+        if ([profilePic isEqualToString:@""])
+        {
+            flat = [UIImage imageNamed:@"no_image"];
+        }
 
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -225,13 +243,16 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     if([segue.identifier isEqualToString:@"ImageTaken"])
     {
-     SavingImage *s = segue.destinationViewController;
-     s.image_from_previous_screen = uploadedimage;
+        SavingImage *s = segue.destinationViewController;
+        s.image_from_previous_screen = uploadedimage;
     }
     
     else if ([segue.identifier isEqualToString:@"categoryDetail"])
     {
+        CategoryImage *c = segue.destinationViewController;
+        c.selected_category = category_button.tag;
         
+        NSLog(@"the selected category is %d",category_button.tag);
     }
 
 }
@@ -250,7 +271,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 -(void)categoryButtonClicked:(id)sender{
     
-    NSLog(@"Button Clicked");
+    [category_button setBackgroundColor:[UIColor whiteColor]];
+    category_button = (UIButton *)sender;
+
+    [category_button setBackgroundColor:[UIColor grayColor]];
     [self performSegueWithIdentifier:@"categoryDetail" sender:self];
 }
 

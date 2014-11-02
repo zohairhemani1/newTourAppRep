@@ -33,6 +33,7 @@
     fixedButtons = [[NSArray alloc]initWithObjects:@"building images",@"building lobby",@"amenities",@"day care",@"path connection",@"public transit",@"parking",@"elevators",@"elevator lobby",@"suit entrance",@"condition of premises",@"views",@"IT room",@"frieght elevator",@"green aspects", nil];
     
     [self drawCategoryButtons];
+
 }
 
 -(void)drawCategoryButtons{
@@ -47,6 +48,21 @@
         [category_button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         category_button.layer.borderWidth = 1.0f;
         category_button.layer.borderColor = [UIColor grayColor].CGColor;
+        
+        if(self.selected_category == -1)
+        {
+            if(i==1)
+            {
+                [category_button setBackgroundColor:[UIColor grayColor]];
+            }
+        }
+        else
+        {
+             if((i-1) == self.selected_category)
+             {
+                 [category_button setBackgroundColor:[UIColor grayColor]];
+             }
+        }
         
         category_button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         category_button.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -64,12 +80,8 @@
 }
 
 -(void)buttonClicked:(id)sender{
-    
-    for(int i=1;i<=[fixedButtons count];i++){
         
-        [category_button setBackgroundColor:[UIColor whiteColor]];
-        
-    }
+    [category_button setBackgroundColor:[UIColor whiteColor]];
     
     category_button = (UIButton *)sender;
     NSLog(@"Button clicked with tag %d", category_button.tag);

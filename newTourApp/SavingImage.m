@@ -7,6 +7,7 @@
 //
 
 #import "SavingImage.h"
+#import "CategoryImage.h"
 
 @interface SavingImage (){
     NSArray *fixedButtons;
@@ -75,12 +76,8 @@
 }
 
 -(void)buttonClicked:(id)sender{
-    
-    for(int i=1;i<=[fixedButtons count];i++){
         
-        [category_button setBackgroundColor:[UIColor whiteColor]];
-        
-    }
+    [category_button setBackgroundColor:[UIColor whiteColor]];
     
     category_button = (UIButton *)sender;
     NSLog(@"Button clicked with tag %d", category_button.tag);
@@ -117,15 +114,17 @@
     [self performSegueWithIdentifier:@"showSavedImages" sender:self];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
+
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
  {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+ 
+     if([segue.identifier isEqualToString:@"showSavedImages"])
+     {
+         CategoryImage *c = segue.destinationViewController;
+         c.selected_category = -1;
+     }
+     
  }
- */
+ 
 
 @end

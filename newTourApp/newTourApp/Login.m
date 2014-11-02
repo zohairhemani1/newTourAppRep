@@ -11,9 +11,7 @@
 #import "Constants.h"
 #import "DBManager.h"
 
-@interface Login (){
-    
-}
+@interface Login ()
 @end
 
 static NSArray *result;
@@ -50,6 +48,11 @@ static NSArray *result;
     result = [w FilePath:LOGIN parameterOne:self.username.text parameterTwo:self.password.text];
     
     if([result valueForKey:@"user_email"] !=nil ){
+        
+        [[NSUserDefaults standardUserDefaults ] setObject:[result valueForKey:@"user_email"] forKey:@"user_email"];
+        [[NSUserDefaults standardUserDefaults ] setObject:[result valueForKey:@"user_id"] forKey:@"user_id"];
+        [[NSUserDefaults standardUserDefaults ] setObject:[result valueForKey:@"user_name"] forKey:@"user_name"];
+        [[NSUserDefaults standardUserDefaults ] setObject:[result valueForKey:@"user_status"] forKey:@"user_status"];
     
         [self performSegueWithIdentifier:@"StartLoginProcess" sender:self];
         

@@ -11,7 +11,6 @@
 #import "Constants.h"
 
 @interface Sync ()
-
 @end
 
 static NSArray *result;
@@ -33,6 +32,8 @@ static NSArray *result;
     
     self.syncButton.layer.cornerRadius = 7;
     self.syncButton.clipsToBounds = YES;
+    
+    self.client_name.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"user_name"];
 }
 
 - (void)didReceiveMemoryWarning

@@ -30,7 +30,6 @@
 		1998B5C119FFB53600405E35 /* CategoryImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1998B5C019FFB53600405E35 /* CategoryImage.m */; };
 		1998B5C519FFC2F700405E35 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1998B5C319FFC2F700405E35 /* WebService.m */; };
 		B72B125C1A0275B200CCEF60 /* FileManagerLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = B72B125B1A0275B200CCEF60 /* FileManagerLibrary.m */; };
-		DCEBA5911A0527E400DA5ABB /* showCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEBA5901A0527E400DA5ABB /* showCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +80,6 @@
 		1998B5C419FFC2F700405E35 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B72B125A1A0275B200CCEF60 /* FileManagerLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManagerLibrary.h; sourceTree = "<group>"; };
 		B72B125B1A0275B200CCEF60 /* FileManagerLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManagerLibrary.m; sourceTree = "<group>"; };
-		DCEBA58F1A0527E400DA5ABB /* showCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showCategory.h; sourceTree = "<group>"; };
-		DCEBA5901A0527E400DA5ABB /* showCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showCategory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +157,6 @@
 				1998B5B719FFB4FA00405E35 /* MasterItenary.m */,
 				1998B5B919FFB50A00405E35 /* DetailItenary.h */,
 				1998B5BA19FFB50A00405E35 /* DetailItenary.m */,
-				DCEBA58F1A0527E400DA5ABB /* showCategory.h */,
-				DCEBA5901A0527E400DA5ABB /* showCategory.m */,
 				1998B5BC19FFB52500405E35 /* SavingImage.h */,
 				1998B5BD19FFB52500405E35 /* SavingImage.m */,
 				1998B5BF19FFB53600405E35 /* CategoryImage.h */,
@@ -308,7 +303,6 @@
 				1998B5C119FFB53600405E35 /* CategoryImage.m in Sources */,
 				1998B5B819FFB4FA00405E35 /* MasterItenary.m in Sources */,
 				192597C91A027CB800027772 /* DBManager.m in Sources */,
-				DCEBA5911A0527E400DA5ABB /* showCategory.m in Sources */,
 				1998B58B19FFB1A800405E35 /* main.m in Sources */,
 				1998B5BE19FFB52500405E35 /* SavingImage.m in Sources */,
 				1998B5BB19FFB50A00405E35 /* DetailItenary.m in Sources */,
